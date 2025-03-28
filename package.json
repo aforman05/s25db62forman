@@ -1,0 +1,20 @@
+{
+  "name": "s25wb62forman",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "^4.4.0",
+    "express": "^4.21.2",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.3"
+  },
+  "description": "webapps assignment 10",
+  "main": "app.js",
+  "author": "Andrea Forman",
+  "license": "ISC"
+}
