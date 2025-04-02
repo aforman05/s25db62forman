@@ -4,4 +4,17 @@ block content
   h1= title
   p Hello there!
 
-  button(type="button", class="btn btn-info") Sample Button
+  button(type="button", class="btn btn-info", onclick='faster()') Sample Button
+
+  div#faster Add in extra
+
+  script.
+    let value = 1;
+    let amount = 2;
+
+    function faster() {
+      amount *= 2
+      value += amount
+
+      document.getElementById("faster").textContent = `Faster ${value} times ${amount}`;
+    }
