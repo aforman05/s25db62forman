@@ -2,3 +2,13 @@ extends layout
 
 block content
   h1= title
+
+  - var results = [{ latitude: 51.4, longitude: 0.5, climate: "Temperate" }, { latitude: 41.4, longitude: 1.9, climate: "Mediterranean" }, { latitude: 39.5, longitude: 105.1, climate: "Semi-Arid" }];
+
+  .container-fluid 
+    .row
+      each result in results
+        .col-sm-2 
+          p Latitude: #{result.latitude}
+          p Longitude: #{result.longitude}
+          p Climate: #{result.climate}
