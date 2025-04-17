@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1= title
+
+    form(id='LocationForm', action="/resource/location", method="POST")
+        div.form-group
+            label.locationAttr(for='location_long') Location longitude
+            input#location_long(type='number', name='longitude')
+        div.form-group
+            label.locationAttr(for='lat') Location lat
+            input#lat(type='number', name='latitude')
+        div.form-group
+            label.locationAttr(for='climate') Location climate
+            input#climate(type='text', name='climate')
+        input(type="submit")
+    script.
+        document.forms['LocationForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Save succeded")
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Save failed " + error )
+            });
+        });
