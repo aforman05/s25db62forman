@@ -23,8 +23,15 @@ exports.location_view_all_Page = async function(req, res) {
     }
 };
 // for a specific Costume.
-exports.location_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Location detail: ' + req.params.id);
+exports.location_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await Location.findById( req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
 // Handle Costume create on POST.
 exports.location_create_post = async function(req, res) {
@@ -46,11 +53,46 @@ exports.location_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
 };
-// Handle Costume delete from on DELETE.
-exports.location_delete = function(req, res) {
-res.send('NOT IMPLEMENTED: Location delete DELETE ' + req.params.id);
+// Handle Location delete on DELETE.
+exports.location_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Location.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
 };
-// Handle Costume update form on PUT.
-exports.location_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Location update PUT' + req.params.id);
+// Handle Location update form on PUT.
+exports.location_update_put = async function(req, res) {
+    console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Location.findById(req.params.id)
+        // Do updates of properties
+        if(req.body.longitude) toUpdate.longitude = req.body.longitude;
+        if(req.body.latitude) toUpdate.latitude = req.body.latitude;
+        if(req.body.climate) toUpdate.climate = req.body.climate;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+    }
+};
+
+// Handle a show one view with id specified by query
+exports.location_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+        result = await Location.findById( req.query.id)
+        res.render('locationdetail', { title: 'Location Detail', toShow: result });
+    } catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
 };

@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1= title
+
+    - let location_id = toShow._id
+    - let location_long = toShow.longitude
+    - let location_lat = toShow.latitude
+    - let location_climate = toShow.climate
+    div
+        div.row
+            div(class='locationAttr mr-3') Location ID is:
+            div #{location_id}
+        div.row
+            div(class='locationAttr mr-3') Costume Type is:
+            div #{location_long}
+        div.row
+            div(class='costumeAttr mr-3') Costume Size is:
+            div #{location_lat}
+        div.row
+            div(class='costumeAttr mr-3') Costume Cost is:
+            div #{location_climate}
