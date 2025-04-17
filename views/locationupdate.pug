@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    h1= title
+
+    // Display the ID (not in the form)
+    p Location ID: #{toShow._id}
+
+    form(id='LocationUpdateForm', action="/resource/location/${toShow._id}", method="POST")
+        input(type='hidden', name='_method', value='PUT')
+
+        div.form-group
+            label.locationAttr(for='location_long') Location longitude
+            input#location_long(type='number', step='any', name='longitude', value=toShow.latitude)
+        div.form-group
+            label.locationAttr(for='lat') Location lat
+            input#lat(type='number', step='any', name='latitude', value=toShow.longitude)
+        div.form-group
+            label.locationAttr(for='climate') Location climate
+            input#climate(type='text', name='climate')
+        input(type="submit")
+    script.
+        document.forms['LocationUpdateForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(event.target.action, {
+                method: 'PUT',
+                body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+            }).then(resp => resp.json())
+                .then(data => alert("Update succeeded"))
+                .catch(err => alert("Update failed " + err));
+        });
