@@ -19,7 +19,7 @@ router.get('/detail/:id', location_controllers.location_view_one_Page);
 router.get('/create', location_controllers.location_create_Page);
 
 /* GET create update page */
-router.get('/update', location_controllers.location_update_Page);
+router.get('/update/:id', location_controllers.location_update_Page);
 
 // GET request for a location.
 router.get('/:id', location_controllers.location_detail);
