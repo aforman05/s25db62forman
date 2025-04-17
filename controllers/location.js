@@ -87,9 +87,9 @@ failed`);
 
 // Handle a show one view with id specified by query
 exports.location_view_one_Page = async function(req, res) {
-    console.log("single view for id " + req.query.id)
+    console.log("single view for id " + req.params.id)
     try{
-        result = await Location.findById( req.query.id)
+        result = await Location.findById( req.params.id)
         res.render('locationdetail', { title: 'Location Detail', toShow: result });
     } catch(err){
     res.status(500)

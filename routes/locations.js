@@ -16,4 +16,4 @@ router.post('/:id', location_controllers.location_update_put);
 router.delete('/:id', location_controllers.location_delete);
 
 //Get detail location page
-router.get('/detail', location_controllers.location_view_one_Page);
+router.get('/detail/:id', location_controllers.location_view_one_Page);
