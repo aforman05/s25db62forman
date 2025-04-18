@@ -116,7 +116,7 @@ res.send(`{'error': '${err}'}`);
 exports.location_update_Page = async function(req, res) {
 console.log("update view for item "+req.params.id)
 try{
-let result = await Location.findById(req.params.id)
+result = await Location.findById(req.params.id)
 res.render('locationupdate', { title: 'Location Update', toShow: result });
 }
 catch(err){

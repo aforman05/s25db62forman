@@ -6,9 +6,12 @@ block content
   - let items = theLocations
 
   .container-fluid 
-    .row
+    .row-m-1
       each item in items
-        .col-sm-2 
-          p Latitude: #{item.latitude}
-          p Longitude: #{item.longitude}
-          p Climate: #{item.climate}
+        - let destination = `dispatch(\"/locations/update/${item._id}\")`
+        .row-sm-2.m-1 Item #{item.latitude}, #{item.longitude} is #{item.climate}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+    script.
+      function dispatch(path){
+        window.location.href=path
+      }
