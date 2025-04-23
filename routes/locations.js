@@ -20,13 +20,13 @@ module.exports = router;
 router.post('/:id', location_controllers.location_update_put);
 
 //Delete request for a location
-router.delete('/:id', location_controllers.location_delete);
+router.delete('/:id', secured, location_controllers.location_delete);
 
 //Get detail location page
 router.get('/detail/:id', location_controllers.location_view_one_Page);
 
 //Get create location page
-router.get('/create', location_controllers.location_create_Page);
+router.get('/create', secured, location_controllers.location_create_Page);
 
 /* GET create update page */
 router.get('/update/:id', secured, location_controllers.location_update_Page);

@@ -2,6 +2,8 @@ extends layout
 
 block content
   h1= title
+  - let createPage = `dispatch(\"/locations/create\")`
+  button.btn( class="btn-primary ml-1", onclick= createPage) Create a new location
 
   - let items = theLocations
 
@@ -9,8 +11,12 @@ block content
     .row-m-1
       each item in items
         - let destination = `dispatch(\"/locations/update/${item._id}\")`
+        - let destination2 = `dispatch(\"/locations/detail/${item._id}\")`
+        - let destination3 = `dispatch(\"/locations/${item._id}\")`
         .row-sm-2.m-1 Item #{item.latitude}, #{item.longitude} is #{item.climate}
           button.btn( class="btn-primary ml-1", onclick= destination) Update
+          button.btn( class="btn-primary ml-1", onclick= destination2) Details
+          button.btn( class="btn-primary ml-1", onclick= destination3) Delete
     script.
       function dispatch(path){
         window.location.href=path
